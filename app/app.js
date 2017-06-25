@@ -6,3 +6,28 @@ ReactDOM.render(
     <List/>,
     document.getElementById('root')
 );
+
+require('./redux_example.js');
+require('./dispatch.js');
+require('./subscribe_debugtool.js');
+
+/*
+ * Toán tử dấu ...
+ * pure function
+ * */
+
+/*
+ var obj = {
+ name: "minhvt",
+ age: 23
+ };
+
+
+ /!*pure function*!/
+ var add = (a, b) => a + b;
+
+ var obj2 = {...obj};
+
+ obj.age = 18;
+ console.log(obj2);
+ console.log(add(5,10));*/
