@@ -7,9 +7,11 @@ ReactDOM.render(
     document.getElementById('root')
 );
 
-require('./redux_example.js');
-require('./dispatch.js');
-require('./subscribe_debugtool.js');
+// require('./redux_example.js');
+// require('./dispatch.js');
+// require('./subscribe_debugtool.js');
+
+require('./chia_nho_reducer.js');
 
 /*
  * Toán tử dấu ...

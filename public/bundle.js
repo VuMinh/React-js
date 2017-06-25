@@ -10276,37 +10276,7 @@ var List = function (_React$Component) {
 module.exports = List;
 
 /***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var redux = __webpack_require__(206);
-var defaultState = {
-    mang: ['Androi', 'IOS', 'Node js'],
-    isAdding: false
-};
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
-    var action = arguments[1];
-
-    switch (action.type) {
-        case 'TOGGLE_IS_ADDING':
-            return _extends({}, state, { isAdding: !state.isAdding });
-        default:
-            return state;
-    }
-};
-var store = redux.createStore(reducer);
-console.log(store.getState());
-/* để thực thi chỉ thị ta dùng dispatch()*/
-store.dispatch({ type: 'TOGGLE_IS_ADDING' });
-console.log(store.getState());
-
-/***/ }),
+/* 89 */,
 /* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10357,9 +10327,11 @@ var List = __webpack_require__(88);
 
 ReactDOM.render(React.createElement(List, null), document.getElementById('root'));
 
-__webpack_require__(89);
-__webpack_require__(210);
-__webpack_require__(211);
+// require('./redux_example.js');
+// require('./dispatch.js');
+// require('./subscribe_debugtool.js');
+
+__webpack_require__(212);
 
 /*
  * Toán tử dấu ...
@@ -23731,150 +23703,87 @@ function symbolObservablePonyfill(root) {
 };
 
 /***/ }),
-/* 210 */
+/* 210 */,
+/* 211 */,
+/* 212 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var redux = __webpack_require__(206);
-var defaultState = {
-    mang: ['Adroid', 'IOS', 'Minhvt'],
-    isAdding: false
-};
+
+/*var defaultState = {
+ mang: ['Adroid', 'IOS', 'Minhvt'],
+ isAdding: false
+ };*/
 /* thực thi chỉ thị với mảng: thêm, xóa phần tử trong mảng*/
 
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+/*var reducer = (state = defaultState, action) => {
+ switch (action.type) {
+ case 'TOGGLE_IS_ADDING':
+ return {...state, isAdding: !state.isAdding};
+ case 'ADD_ITEM':
+ return {...state, mang: [...state.mang, action.item]};
+
+ case 'REMOVE_ITEM':
+ return {...state, mang: state.mang.filter((e, i) => i !== action.index)};
+
+ default:
+ return state;
+ }
+ };*/
+
+var mangReducer = function mangReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : ['Android', 'IOS', 'Node js'];
     var action = arguments[1];
 
     switch (action.type) {
-        case 'TOGGLE_IS_ADDING':
-            return _extends({}, state, { isAdding: !state.isAdding });
-        /* Thêm phần tử vào mảng*/
-        /* muốn thêm phần tử vào mảng:
-        * đầu tiên copy mảng ban đầu
-        * phần tử cuối cùng trong mảng bằng : action.item
-        * */
         case 'ADD_ITEM':
-            return _extends({}, state, { mang: [].concat(_toConsumableArray(state.mang), [action.item]) });
+            return [].concat(_toConsumableArray(state), [action.item]);
 
-        /*Xóa phần tử trong mảng:
-        * dùng câu lệnh filter()
-        * i!=action.index nghĩa là: nếu i nào khác action.index nghĩa là phần tử nào có index
-        * không phải là index mà ta muốn xóa nghĩa là trả về true=> không bị xóa
-        * */
         case 'REMOVE_ITEM':
-            return _extends({}, state, { mang: state.mang.filter(function (e, i) {
-                    return i !== action.index;
-                }) });
+            return state.filter(function (e, i) {
+                return i !== action.index;
+            });
 
         default:
             return state;
     }
 };
 
-var store = redux.createStore(reducer);
-/*Cách theo dõi sự thay đổi của state:
-* Subscribe và dubug toll
-* mỗi lần store thay đổi thì làm gì
-* thay vì sau mỗi lần thay đổi ta log ra thì ta sẽ dùng
- * store.subscribe(()=>console.log(store.getState()));
-* */
-
-// store.subscribe(()=>console.log('changed'));
-store.subscribe(function () {
-    return console.log(store.getState());
-});
-store.dispatch({ type: 'TOGGLE_IS_ADDING' });
-// console.log(store.getState());
-store.dispatch({
-    type: 'ADD_ITEM',
-    item: 'Stupid'
-});
-// console.log(store.getState());
-
-store.dispatch({
-    type: 'REMOVE_ITEM',
-    index: 1
-});
-// console.log(store.getState());
-
-/***/ }),
-/* 211 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var redux = __webpack_require__(206);
-var defaultState = {
-    mang: ['Adroid', 'IOS', 'Minhvt'],
-    isAdding: false
-};
-/* thực thi chỉ thị với mảng: thêm, xóa phần tử trong mảng*/
-
-var reducer = function reducer() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : defaultState;
+var isAddingReducer = function isAddingReducer() {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     var action = arguments[1];
 
     switch (action.type) {
         case 'TOGGLE_IS_ADDING':
-            return _extends({}, state, { isAdding: !state.isAdding });
-        /* Thêm phần tử vào mảng*/
-        /* muốn thêm phần tử vào mảng:
-         * đầu tiên copy mảng ban đầu
-         * phần tử cuối cùng trong mảng bằng : action.item
-         * */
-        case 'ADD_ITEM':
-            return _extends({}, state, { mang: [].concat(_toConsumableArray(state.mang), [action.item]) });
-
-        /*Xóa phần tử trong mảng:
-         * dùng câu lệnh filter()
-         * i!=action.index nghĩa là: nếu i nào khác action.index nghĩa là phần tử nào có index
-         * không phải là index mà ta muốn xóa nghĩa là trả về true=> không bị xóa
-         * */
-        case 'REMOVE_ITEM':
-            return _extends({}, state, { mang: state.mang.filter(function (e, i) {
-                    return i !== action.index;
-                }) });
-
+            return !state;
         default:
             return state;
     }
 };
+
+/*gọi câu lệnh kết nối 2 reducer*/
+var reducer = redux.combineReducers({
+    /*truyền vào một đối tượng => thuộc tính nào sẽ được điều khiển bằng reducer nào*/
+    mang: mangReducer,
+    isAdding: isAddingReducer
+});
+
 /*
-* sử dụng redux tool để kiểm tra ta làm như sau:
-* */
+ * sử dụng redux tool để kiểm tra ta làm như sau:
+ * */
 // var store = redux.createStore(reducer);
 
 var store = redux.createStore(reducer, redux.compose(window.devToolsExtension ? window.devToolsExtension() : function (f) {
     return f;
 }));
 
-/*Cách theo dõi sự thay đổi của state:
- * Subscribe và dubug toll
- * mỗi lần store thay đổi thì làm gì
- * thay vì sau mỗi lần thay đổi ta log ra thì ta sẽ dùng
- * store.subscribe(()=>console.log(store.getState()));
- * */
-
-/* sử dụng subscribe để theo dõi sự thay đổi của state*/
-// store.subscribe(() => console.log(store.getState()));
-
 /* sử dụng debug tool*/
 store.subscribe(function () {
-    /*
-    * JSON.stringify(str) chuyển đối tượng sang dạng JSON
-    * */
     var str = store.getState();
     document.getElementById('p-detail').innerHTML = JSON.stringify(str);
 });
