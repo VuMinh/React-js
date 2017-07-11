@@ -1,9 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 class Note extends React.Component {
     removeNote() {
-        var {index, handleRemove} = this.props;
-        handleRemove(index);
+        // var {index, handleRemove} = this.props;
+        // handleRemove(index);
+        var {index, dispatch} = this.props;
+        dispatch({
+            type: 'REMOVE_ITEM',
+            index: index,
+        })
     }
 
     render() {
@@ -15,4 +21,11 @@ class Note extends React.Component {
         )
     }
 }
-module.exports = Note;
+
+/* vì không lấy state nên ta ko cần function state*/
+/*
+ module.exports =connect(function (state) {
+ return{mang:state.mang};
+ })(Note);*/
+
+module.exports = connect()(Note);

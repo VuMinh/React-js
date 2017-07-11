@@ -30,13 +30,14 @@ var reducer = (state = defaultState, action) => {
     }
 };
 /*
-* sử dụng redux tool để kiểm tra ta làm như sau:
-* */
+ * sử dụng redux tool để kiểm tra ta làm như sau:
+ * */
 // var store = redux.createStore(reducer);
 
 var store = redux.createStore(reducer, redux.compose(
-    window.devToolsExtension? window.devToolsExtension():f=>f
-));
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+);
 
 /*Cách theo dõi sự thay đổi của state:
  * Subscribe và dubug toll
@@ -50,11 +51,12 @@ var store = redux.createStore(reducer, redux.compose(
 
 /* sử dụng debug tool*/
 store.subscribe(() => {
+    // console.log(store.getState());
     /*
-    * JSON.stringify(str) chuyển đối tượng sang dạng JSON
-    * */
-    var str=store.getState();
-    document.getElementById('p-detail').innerHTML =JSON.stringify(str)
+     * JSON.stringify(str) chuyển đối tượng sang dạng JSON
+     * */
+    var str = store.getState();
+    document.getElementById('p-detail').innerHTML = JSON.stringify(str)
 })
 ;
 

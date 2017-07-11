@@ -21,7 +21,7 @@ var redux = require('redux');
  }
  };*/
 
-var mangReducer = (state = ['Android', 'IOS', 'Node js'],action) => {
+var mangReducer = (state = ['Android', 'IOS', 'Node js'], action) => {
     switch (action.type) {
         case 'ADD_ITEM':
             return [...state, action.item];
@@ -76,3 +76,4 @@ store.dispatch({
     type: 'REMOVE_ITEM',
     index: 1
 });
+module.exports = store;

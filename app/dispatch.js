@@ -40,16 +40,14 @@ var store=redux.createStore(reducer);
 
 // store.subscribe(()=>console.log('changed'));
 store.subscribe(()=>console.log(store.getState()));
-store.dispatch({type:'TOGGLE_IS_ADDING'});
-// console.log(store.getState());
+
+/*store.dispatch({type:'TOGGLE_IS_ADDING'});
 store.dispatch({
    type:'ADD_ITEM',
     item: 'Stupid'
 });
-// console.log(store.getState());
-
 store.dispatch({
    type:'REMOVE_ITEM',
     index:1
-});
-// console.log(store.getState());
+});*/
+module.exports = store;
