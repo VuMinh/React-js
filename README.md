@@ -27,5 +27,6 @@ Then open new Terminal (CMD) tab and run "node index"
   - Thực hiện dựa vào kết quả của hàm (shouldComponentUpdate), nếu hàm (shouldComponentUpdate) trả về false => thì hàm này sẽ không được gọi.
 ## componentDidUpdate(prevProps, prevState):
   - Thực hiện khi Component được render lại.
+#### this.setState: là hàm async
   
  
